@@ -9,7 +9,7 @@
 #define SAMPLES 16000*3
 #elif defined(ARDUINO_ARCH_NRF52840)
 #define DEBUG 1                 // Enable pin pulse during ISR  
-#define SAMPLES 16000
+#define SAMPLES 800
 #endif
 
 mic_config_t mic_config{
@@ -48,7 +48,6 @@ void setup() {
 
   Mic.set_callback(audio_rec_callback);
   Mic.setGain(80);
-
   if (!Mic.begin()) {
     Serial.println("Mic initialization failed");
     while (1);
@@ -81,7 +80,7 @@ if (digitalRead(WIO_KEY_A) == LOW && !recording) {
     
   //int16_t sample = filter.step(recording_buf[i]);
   int16_t sample = recording_buf[i];
-  // Serial.println(sample);
+  Serial.println(sample);
   }
   
   record_ready = false; 
